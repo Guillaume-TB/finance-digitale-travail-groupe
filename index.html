@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Stablecoins — Analyse Académique 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg: #ffffff;
+  --surface: #f8f9fa;
+  --card: #ffffff;
+  --card2: #f1f5f9;
+  --accent: #002868; 
+  --accent2: #002868; 
+  --accent3: #bf0a30; 
+  --teal: #004080;
+  --gold: #8b0000;
+  --red: #bf0a30;
+  --border: #e2e8f0;
+  --border2: #cbd5e1;
+  --text: #1e293b;
+  --muted: #64748b;
+  --soft: #475569;
+  --font: 'Inter', system-ui, sans-serif;
+  --serif: 'Merriweather', Georgia, serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:400;line-height:1.7;overflow-x:hidden}
+
+/* ══ NAV ══ */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 3vw;height:62px;
+  background:rgba(255,255,255,.95);backdrop-filter:blur(10px);
+  border-bottom:2px solid var(--accent)}
+.nav-logo{font-size:.9rem;font-weight:700;color:var(--accent);
+  letter-spacing:.05em;text-transform:uppercase;display:flex;align-items:center;gap:.5rem;font-family:var(--serif)}
+.nav-logo span{opacity:.4;color:var(--red)}
+.nav-links{display:flex;gap:1.2rem;list-style:none}
+.nav-links a{font-size:.75rem;color:var(--soft);text-decoration:none;font-weight:600;
+  letter-spacing:.02em;padding:.2em 0;
+  border-bottom:2px solid transparent;transition:color .3s,border-color .3s}
+.nav-links a:hover,.nav-links a.active{color:var(--accent);border-bottom-color:var(--red)}
+.nav-cta{font-size:.7rem;font-weight:700;color:#fff;
+  background:var(--accent);padding:.5em 1.2em;
+  text-decoration:none;letter-spacing:.04em;transition:background .3s, transform .2s;text-transform:uppercase;border-radius:4px}
+.nav-cta:hover{background:var(--red);transform:translateY(-2px)}
+#rpb{position:fixed;top:62px;left:0;right:0;height:3px;z-index:300;
+  background:var(--red);
+  transform-origin:left;transform:scaleX(0);transition:transform .1s ease-out}
+
+/* ══ LAYOUT ══ */
+main{position:relative;z-index:1}
+section{min-height:100vh;display:flex;flex-direction:column;
+  justify-content:center;padding:7.5rem 6vw 5rem;position:relative}
+.inner{max-width:1060px;margin:0 auto;width:100%}
+.alt{background:var(--surface)}
+.divider{position:relative;z-index:1;width:100%;height:1px;background:var(--border)}
+
+/* ══ EYEBROW ══ */
+.ey{font-size:.75rem;font-weight:700;color:var(--red);
+  letter-spacing:.15em;text-transform:uppercase;margin-bottom:.9rem;
+  display:flex;align-items:center;gap:.65rem}
+.ey::before{content:'';width:20px;height:2px;background:var(--red)}
+
+/* ══ TYPOGRAPHY ══ */
+h1{font-family:var(--serif);font-size:clamp(2.5rem,5vw,4.5rem);
+  font-weight:900;line-height:1.1;letter-spacing:-.02em;margin-bottom:1.3rem;color:var(--accent)}
+h1 em{font-style:italic;color:var(--red)}
+h2{font-family:var(--serif);font-size:clamp(1.8rem,3.2vw,2.7rem);
+  font-weight:700;line-height:1.2;letter-spacing:-.01em;margin-bottom:1.8rem;color:var(--accent)}
+.lead{font-size:clamp(1rem,1.65vw,1.15rem);color:var(--soft);
+  max-width:700px;margin-bottom:2.5rem;font-weight:400;line-height:1.8}
+.wm{position:absolute;right:4vw;top:6rem;font-family:var(--serif);
+  font-size:10rem;font-weight:900;color:rgba(0,40,104,.03);
+  line-height:1;pointer-events:none;user-select:none}
+
+/* ══ CARDS & GRIDS ══ */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.card{background:var(--card);border:1px solid var(--border);
+  padding:2rem;position:relative;transition:all .4s cubic-bezier(0.175, 0.885, 0.32, 1.275)}
+.card:hover{transform:translateY(-6px);box-shadow:0 15px 35px rgba(0,40,104,.08)}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:var(--accent);opacity:0;transition:opacity .3s}
+.card:hover::before{opacity:1;background:var(--red)}
+.card-ico{font-size:2rem;margin-bottom:1rem;display:inline-block}
+.card-title{font-size:.9rem;font-weight:700;color:var(--accent);
+  letter-spacing:.05em;text-transform:uppercase;margin-bottom:.8rem;font-family:var(--serif)}
+
+/* ══ REVEAL ══ */
+.rv{opacity:0;transform:translateY(30px) scale(0.98);
+  transition:opacity .7s cubic-bezier(0.16, 1, 0.3, 1), transform .7s cubic-bezier(0.16, 1, 0.3, 1)}
+.rv.vis{opacity:1;transform:translateY(0) scale(1)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}
+
+/* ══ FOOTER ══ */
+footer{padding:3rem 6vw;background:var(--accent);color:#fff;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem}
+footer p{font-size:.85rem;opacity:.8}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">Stablecoins <span>|</span> Analyse 2026</span>
+  <ul class="nav-links">
+    <li><a href="#hero">Accueil</a></li>
+    <li><a href="#risques">Risques</a></li>
+    <li><a href="#perturbations">Stabilité</a></li>
+    <li><a href="#sources">Sources</a></li>
+  </ul>
+  <a href="#sources" class="nav-cta">Guillaume THONGSOUM BOIS</a>
+</nav>
+<div id="rpb"></div>
+
+<main>
+
+<section id="hero">
+  <div class="inner">
+    <p class="ey rv">7 sources académiques · 2020–2025 · Guillaume THONGSOUM BOIS</p>
+    <h1 class="rv d1">L'Analyse des <em>Risques</em><br/>et la Stabilité Monétaire.</h1>
+    <p class="lead rv d2">Étude de l'impact des actifs numériques sur les canaux de transmission de la politique monétaire et les risques systémiques associés.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="risques" class="alt">
+  <div class="wm">11</div>
+  <div class="inner">
+    <p class="ey rv">Risques Systémiques</p>
+    <h2 class="rv">Le traumatisme <em>Terra / Luna</em></h2>
+    <div class="g3 rv d1">
+      <div class="card">
+        <div class="card-ico">📉</div>
+        <div class="card-title">Effondrement UST</div>
+        <p>Environ 40 Mds$ détruits en 72h lors de la rupture de l'ancrage algorithmique en mai 2022. [cite: 1]</p>
+      </div>
+      <div class="card">
+        <div class="card-ico">🔥</div>
+        <div class="card-title">Spirale Mortelle</div>
+        <p>Le mécanisme d'arbitrage entre UST et LUNA a provoqué une hyperinflation du jeton de gouvernance. [cite: 1]</p>
+      </div>
+      <div class="card">
+        <div class="card-ico">⚖️</div>
+        <div class="card-title">Réponse MiCA</div>
+        <p>Ce crash a catalysé la mise en place de réserves 1:1 obligatoires dans l'Union Européenne. [cite: 5]</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="perturbations">
+  <div class="wm">12</div>
+  <div class="inner">
+    <p class="ey rv">Transmission Monétaire</p>
+    <h2 class="rv">Les 3 canaux de <em>perturbation</em></h2>
+    <p class="lead rv">Comment les stablecoins impactent la souveraineté des banques centrales. <strong>Source : Billet BCE No 416 & BIS WP 905.</strong> [cite: 1, 3, 4]</p>
+    
+    <div class="g3 rv d1">
+      <div class="card">
+        <div class="card-ico" style="color:var(--red)">📉</div>
+        <div class="card-title">Dépôts bancaires</div>
+        <p>Les ménages déplacent leur épargne vers les stablecoins. Les banques perdent une source de financement stable, augmentant le coût du crédit. [cite: 3, 4]</p>
+        <div style="margin-top:1rem; padding-top:1rem; border-top:1px solid var(--border); font-size:0.85rem; color:var(--red); font-weight:700;">
+          Impact BCE : 100 Mds$ de dépôts ≈ -50 Mds$ de prêts. [cite: 4]
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-ico" style="color:var(--accent)">⚖️</div>
+        <div class="card-title">Liquidité interbancaire</div>
+        <p>La baisse de la demande de monnaie centrale affaiblit le pilotage des taux directeurs par la Banque Centrale. [cite: 1, 4]</p>
+        <div style="margin-top:1rem; padding-top:1rem; border-top:1px solid var(--border); font-size:0.85rem; color:var(--accent); font-weight:700;">
+          Affaiblissement du pilotage des taux. [cite: 3]
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-ico" style="color:var(--teal)">🏛️</div>
+        <div class="card-title">Actifs sans risque</div>
+        <p>Les émetteurs achètent massivement des bons du Trésor US court terme, influençant les rendements et le marché REPO. [cite: 1, 3]</p>
+        <div style="margin-top:1rem; padding-top:1rem; border-top:1px solid var(--border); font-size:0.85rem; color:var(--teal); font-weight:700;">
+          Pression sur les rendements souverains. [cite: 1]
+        </div>
+      </div>
+    </div>
+
+    <div class="rv d2" style="margin-top:2.5rem; padding:1.5rem; background:var(--surface); border-left:4px solid var(--accent)">
+      <p style="font-size:0.95rem;"><strong>Analyse Empirique (BCE 2025) :</strong> L'effet est actuellement <em>non-linéaire</em>. Une hausse de 10 Mds$ d'USDT réduit le SOFR de seulement 0,7 point de base, mais l'impact pourrait devenir massif avec l'adoption grand public. [cite: 3, 4]</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="sources">
+  <div class="inner">
+    <p class="ey rv">Bibliographie</p>
+    <h2 class="rv">Références <em>Académiques</em></h2>
+    <div class="rv d1" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:1rem;">
+      <p style="font-size:.85rem; color:var(--soft)">[1] BIS WP 905 · Arner, Auer & Frost · 2020</p>
+      <p style="font-size:.85rem; color:var(--soft)">[2] Banque de France · Bénassy-Quéré · 2025</p>
+      <p style="font-size:.85rem; color:var(--soft)">[3] Billet BCE 416 · Dufouleur · 2025</p>
+      <p style="font-size:.85rem; color:var(--soft)">[4] BCE WP 3199 · Altavilla et al. · 2025</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>Stablecoins — Analyse Académique · Guillaume THONGSOUM BOIS</p>
+  <p>Finance Numérique 2026</p>
+</footer>
+
+<script>
+// Animation au scroll
+const rvObs=new IntersectionObserver(e=>{
+  e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');rvObs.unobserve(x.target)}})
+},{threshold:.08});
+document.querySelectorAll('.rv').forEach(el=>rvObs.observe(el));
+
+// Barre de progression
+window.addEventListener('scroll',()=>{
+  const b=document.getElementById('rpb');
+  const t=document.documentElement.scrollHeight-window.innerHeight;
+  b.style.transform=`scaleX(${t>0?window.scrollY/t:0})`;
+});
+</script>
+</body>
+</html>
