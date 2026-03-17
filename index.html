@@ -27,7 +27,7 @@
   --font: 'Inter', system-ui, sans-serif;
   --serif: 'Merriweather', Georgia, serif;
 }
-,::before,*::after{box-sizing:border-box;margin:0;padding:0}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:400;line-height:1.7;overflow-x:hidden}
 
@@ -713,7 +713,7 @@ function renderCoinList(){
 
 function selectCoin(id){
   document.querySelectorAll('.coin-row').forEach(r=>r.classList.remove('selected'));
-  const row=document.querySelector(.coin-row[data-id="${id}"]);
+  const row=document.querySelector(`.coin-row[data-id="${id}"]`);
   if(row)row.classList.add('selected');
   const c=COINS.find(x=>x.id===id);if(!c)return;
   const up=c.change>=0;
@@ -742,10 +742,10 @@ function selectCoin(id){
     },
     options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{display:false},
-        tooltip:{mode:'index',intersect:false,callbacks:{label:ctx=>$${ctx.parsed.y.toFixed(1)} Mds}}},
+        tooltip:{mode:'index',intersect:false,callbacks:{label:ctx=>`$${ctx.parsed.y.toFixed(1)} Mds`}}},
       scales:{
         x:{grid:{color:'#f1f5f9'},ticks:{color:'#475569',font:{size:11}}},
-        y:{grid:{color:'#f1f5f9'},ticks:{color:'#475569',font:{size:11},callback:v=>$${v}M}}
+        y:{grid:{color:'#f1f5f9'},ticks:{color:'#475569',font:{size:11},callback:v=>`$${v}M`}}
       }
     }
   });
@@ -806,9 +806,9 @@ function buildMap(){
   ];
 
   let html='<rect width="800" height="420" fill="#f1f5f9" rx="10"/>';
-  for(let i=1;i<=6;i++)html+=<line x1="0" y1="${i*60}" x2="800" y2="${i*60}" stroke="#e2e8f0" stroke-width="1"/>;
-  for(let i=1;i<=12;i++)html+=<line x1="${i*62}" y1="0" x2="${i*62}" y2="420" stroke="#e2e8f0" stroke-width="1"/>;
-  lands.forEach(d=>{html+=<path d="${d}" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1"/>});
+  for(let i=1;i<=6;i++)html+=`<line x1="0" y1="${i*60}" x2="800" y2="${i*60}" stroke="#e2e8f0" stroke-width="1"/>`;
+  for(let i=1;i<=12;i++)html+=`<line x1="${i*62}" y1="0" x2="${i*62}" y2="420" stroke="#e2e8f0" stroke-width="1"/>`;
+  lands.forEach(d=>{html+=`<path d="${d}" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1"/>`});
 
   COUNTRIES.forEach(c=>{
     const col=LC[c.level];
@@ -836,7 +836,7 @@ function buildMap(){
       let ty=cd.cy*scY+(svgR.top-contR.top)-8;
       if(tx+250>contR.width)tx-=264;
       if(ty+160>contR.height)ty-=170;
-      tooltip.style.cssText=left:${tx}px;top:${ty}px;;
+      tooltip.style.cssText=`left:${tx}px;top:${ty}px;`;
       tooltip.classList.add('show');
       tooltip.innerHTML=`
         <div class="tt-name">${cd.name} <span style="color:#90cdf4;font-size:.7rem;font-family:var(--font);font-weight:600">${cd.level==='high'?'Très fort':cd.level==='med'?'Fort':'Modéré'}</span></div>
@@ -864,7 +864,7 @@ function buildMap(){
 
 function selectCountry(id){
   document.querySelectorAll('.cp-item').forEach(i=>i.classList.remove('selected'));
-  const el=document.querySelector(.cp-item[data-id="${id}"]);
+  const el=document.querySelector(`.cp-item[data-id="${id}"]`);
   if(el){el.classList.add('selected');el.scrollIntoView({behavior:'smooth',block:'nearest'})}
 }
 
@@ -874,7 +874,7 @@ function selectCountry(id){
 window.addEventListener('scroll',()=>{
   const b=document.getElementById('rpb');
   const t=document.documentElement.scrollHeight-window.innerHeight;
-  b.style.transform=scaleX(${t>0?window.scrollY/t:0});
+  b.style.transform=`scaleX(${t>0?window.scrollY/t:0})`;
 });
 
 const rvObs=new IntersectionObserver(e=>{
@@ -888,7 +888,7 @@ const navObs=new IntersectionObserver(e=>{
   e.forEach(x=>{
     if(x.isIntersecting){
       navAs.forEach(a=>a.classList.remove('active'));
-      const l=document.querySelector(.nav-links a[href="#${x.target.id}"]);
+      const l=document.querySelector(`.nav-links a[href="#${x.target.id}"]`);
       if(l)l.classList.add('active');
     }
   });
