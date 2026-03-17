@@ -8,13 +8,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300&display=swap" rel="stylesheet"/>
 <style>
 :root{
+  /* Palette Maison Blanche */
   --bg: #ffffff;
   --surface: #f8f9fa;
   --card: #ffffff;
   --card2: #f1f5f9;
-  --accent: #002868; 
+  --accent: #002868; /* Navy Blue */
   --accent2: #002868; 
-  --accent3: #bf0a30; 
+  --accent3: #bf0a30; /* Red */
   --teal: #004080;
   --gold: #8b0000;
   --red: #bf0a30;
@@ -26,7 +27,7 @@
   --font: 'Inter', system-ui, sans-serif;
   --serif: 'Merriweather', Georgia, serif;
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+,::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:400;line-height:1.7;overflow-x:hidden}
 
@@ -72,35 +73,224 @@ h1{font-family:var(--serif);font-size:clamp(2.5rem,5vw,4.5rem);
 h1 em{font-style:italic;color:var(--red)}
 h2{font-family:var(--serif);font-size:clamp(1.8rem,3.2vw,2.7rem);
   font-weight:700;line-height:1.2;letter-spacing:-.01em;margin-bottom:1.8rem;color:var(--accent)}
+h2 em{font-style:italic;color:var(--text)}
 .lead{font-size:clamp(1rem,1.65vw,1.15rem);color:var(--soft);
   max-width:700px;margin-bottom:2.5rem;font-weight:400;line-height:1.8}
+strong{color:var(--text);font-weight:700}
 .wm{position:absolute;right:4vw;top:6rem;font-family:var(--serif);
   font-size:10rem;font-weight:900;color:rgba(0,40,104,.03);
   line-height:1;pointer-events:none;user-select:none}
 
-/* ══ CARDS & GRIDS ══ */
+/* ══ HERO ══ */
+#hero{min-height:100vh;justify-content:center;background:#ffffff}
+.htags{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:2rem}
+.htag{font-size:.65rem;font-weight:700;padding:.4em 1em;
+  border:1px solid var(--border2);letter-spacing:.05em;text-transform:uppercase;color:var(--accent);background:var(--surface);
+  transition:all .3s ease}
+.htag:hover{background:var(--accent);color:#fff;transform:translateY(-2px)}
+.hero-stats{display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:2.5rem}
+.hstat{background:var(--surface);border-left:4px solid var(--accent);
+  padding:1.2rem 1.5rem;flex:1 1 140px;transition:transform .3s ease, box-shadow .3s ease}
+.hstat:hover{transform:translateY(-5px);box-shadow:0 8px 20px rgba(0,0,0,.08)}
+.hstat .v{font-family:var(--serif);font-size:2rem;font-weight:700;line-height:1;margin-bottom:.3rem;color:var(--accent)}
+.hstat .l{font-size:.8rem;color:var(--soft);font-weight:600}
+.scroll-cue{position:absolute;bottom:2.5rem;left:6vw;
+  display:flex;align-items:center;gap:.6rem;font-size:.7rem;font-weight:600;
+  color:var(--accent);letter-spacing:.1em;text-transform:uppercase;
+  animation:bob 2.6s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+.scroll-cue svg{width:16px}
+
+/* ══ CARDS & ANIMATIONS ══ */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
 .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.g4{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
 .card{background:var(--card);border:1px solid var(--border);
   padding:2rem;position:relative;transition:all .4s cubic-bezier(0.175, 0.885, 0.32, 1.275)}
 .card:hover{transform:translateY(-6px);box-shadow:0 15px 35px rgba(0,40,104,.08)}
 .card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;
   background:var(--accent);opacity:0;transition:opacity .3s}
 .card:hover::before{opacity:1;background:var(--red)}
-.card-ico{font-size:2rem;margin-bottom:1rem;display:inline-block}
+.card-ico{font-size:2rem;margin-bottom:1rem;display:inline-block;transition:transform .4s ease}
+.card:hover .card-ico{transform:scale(1.15) rotate(5deg)}
 .card-title{font-size:.9rem;font-weight:700;color:var(--accent);
   letter-spacing:.05em;text-transform:uppercase;margin-bottom:.8rem;font-family:var(--serif)}
+.card p{font-size:.95rem;color:var(--soft);line-height:1.7}
 
-/* ══ REVEAL ══ */
+/* ══ TIMELINE RWA ══ */
+.rwa-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:3rem;align-items:center;margin-top:1rem}
+.rwa-text p{font-size:1.05rem;line-height:1.8;color:var(--text);margin-bottom:1.5rem}
+.rwa-steps{display:flex;flex-direction:column;gap:1.5rem;border-left:3px solid var(--border2);padding-left:2rem;position:relative}
+.rwa-step{position:relative;transition:transform .3s ease;cursor:default}
+.rwa-step:hover{transform:translateX(10px)}
+.rwa-step::before{content:'';position:absolute;left:-2.6rem;top:0;width:16px;height:16px;border-radius:50%;background:var(--accent);border:4px solid var(--surface);transition:all .3s ease}
+.rwa-step:hover::before{transform:scale(1.4);background:var(--red)}
+.rwa-step.highlight-step::before{background:var(--red);box-shadow:0 0 0 4px rgba(191,10,48,0.2)}
+.rwa-step h4{color:var(--accent);font-family:var(--serif);font-size:1.1rem;margin-bottom:0.4rem;transition:color .3s}
+.rwa-step:hover h4{color:var(--red)}
+.rwa-step p{font-size:.9rem;color:var(--soft);line-height:1.6}
+
+/* ══ TABLEAU COMPARATIF ══ */
+.comp-table-wrap{overflow-x:auto;margin-top:2rem;border:1px solid var(--border);border-radius:8px;box-shadow:0 4px 15px rgba(0,0,0,0.03)}
+.wh-table{width:100%;border-collapse:collapse;background:var(--card);text-align:left;min-width:700px}
+.wh-table th{background:var(--accent);color:#fff;padding:1.2rem;font-family:var(--serif);font-weight:700;font-size:1rem;border-right:1px solid rgba(255,255,255,0.1)}
+.wh-table th:first-child{background:var(--teal);width:25%}
+.wh-table td{padding:1.2rem;border-bottom:1px solid var(--border);border-right:1px solid var(--border);font-size:.95rem;color:var(--text);transition:background .3s}
+.wh-table tr{transition:background .2s}
+.wh-table tr:hover td{background:rgba(0,40,104,0.03)}
+.wh-table tr:last-child td{border-bottom:none}
+.wh-table tr:nth-child(even) td{background:var(--surface)}
+.wh-table td.col-stable{background:rgba(191,10,48,0.03);font-weight:600;color:var(--accent)} 
+.wh-table tr:nth-child(even) td.col-stable{background:rgba(191,10,48,0.06)}
+.wh-table tr:hover td.col-stable{background:rgba(191,10,48,0.1)}
+
+/* ══ BULLET LIST & BLOCKS ══ */
+.bl{display:flex;flex-direction:column;gap:1.2rem;margin-top:.5rem}
+.bl li{display:flex;gap:1rem;align-items:flex-start;list-style:none;
+  font-size:clamp(.95rem,1.35vw,1.05rem);color:var(--text);line-height:1.7}
+.bl li .dot{flex-shrink:0;width:8px;height:8px;
+  background:var(--accent);margin-top:.5em;transition:transform .3s}
+.bl li:hover .dot{transform:scale(1.5)}
+.bl li .dot.r{background:var(--red)}.bl li .dot.y{background:var(--accent)}
+
+.def{border-left:4px solid var(--red);padding:1.5rem 2rem;
+  background:var(--surface);margin-bottom:2.5rem;transition:box-shadow .3s}
+.def:hover{box-shadow:inset 4px 0 0 var(--accent), 0 5px 15px rgba(0,0,0,.05)}
+.def p{font-size:1.1rem;color:var(--text);font-weight:400;line-height:1.8;font-family:var(--serif)}
+
+/* ══ MODEL CARDS ══ */
+.mc{background:var(--card);border:1px solid var(--border);
+  padding:2rem;text-align:center;transition:all .4s ease}
+.mc:hover{transform:translateY(-5px);box-shadow:0 12px 30px rgba(0,0,0,.08);border-color:var(--accent)}
+.mc .mi{font-size:2.5rem;margin-bottom:1rem;display:inline-block;transition:transform .4s}
+.mc:hover .mi{transform:scale(1.1) translateY(-5px)}
+.mc .ml{font-size:.85rem;font-weight:700;color:var(--accent);
+  letter-spacing:.05em;text-transform:uppercase;margin-bottom:.6rem;font-family:var(--serif)}
+.mc .md{font-size:.95rem;color:var(--soft);margin-bottom:.8rem;line-height:1.6}
+.mc .me{font-size:.75rem;color:var(--muted);font-weight:600}
+
+/* ══ STAT BOXES & SOURCES ══ */
+.srow{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.sbox{background:var(--card);border:1px solid var(--border);
+  padding:1.5rem 2rem;flex:1 1 200px;transition:transform .3s, box-shadow .3s}
+.sbox:hover{transform:translateY(-4px);box-shadow:0 8px 25px rgba(191,10,48,.1)}
+.sbox .sv{font-family:var(--serif);font-size:2.8rem;font-weight:900;
+  color:var(--red);line-height:1;margin-bottom:.5rem}
+.sbox .sl{font-size:.9rem;color:var(--soft);font-weight:500}
+
+.src{display:flex;align-items:flex-start;gap:1rem;background:var(--card);
+  border:1px solid var(--border);padding:1.2rem 1.5rem;transition:all .3s}
+.src:hover{border-color:var(--accent);background:var(--surface);transform:translateX(5px)}
+.src .d{width:6px;height:6px;background:var(--accent);
+  flex-shrink:0;margin-top:.45em}
+.src p{font-size:.9rem;color:var(--soft)}
+
+/* ══ TAGS ══ */
+.tag{display:inline-block;font-size:.65rem;font-weight:700;
+  padding:.2em .6em;margin-left:.4em;vertical-align:middle;letter-spacing:.05em;text-transform:uppercase;transition:transform .2s}
+.tag:hover{transform:scale(1.05)}
+.tv, .tt, .ty{color:var(--accent);background:var(--surface);border:1px solid var(--border2)}
+.tr{color:var(--red);background:#fff0f0;border:1px solid #ffcccc}
+
+/* ══ REVEAL ANIMATIONS ══ */
 .rv{opacity:0;transform:translateY(30px) scale(0.98);
   transition:opacity .7s cubic-bezier(0.16, 1, 0.3, 1), transform .7s cubic-bezier(0.16, 1, 0.3, 1)}
 .rv.vis{opacity:1;transform:translateY(0) scale(1)}
-.d1{transition-delay:.1s}.d2{transition-delay:.2s}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* ══════════════════════════
+   MARKET CAP SECTION
+══════════════════════════ */
+.mcap-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:2.5rem;align-items:start}
+.mcap-list{display:flex;flex-direction:column;gap:.8rem}
+.coin-row{display:flex;align-items:center;gap:1rem;
+  background:var(--card);border:1px solid var(--border);
+  padding:1.2rem;cursor:pointer;
+  transition:all .3s ease}
+.coin-row:hover{border-color:var(--accent);background:var(--surface);transform:translateX(5px)}
+.coin-row.selected{border-left:4px solid var(--red);background:var(--surface);transform:translateX(8px);box-shadow:0 5px 15px rgba(0,0,0,.05)}
+.coin-logo{width:40px;height:40px;border-radius:50%;display:flex;
+  align-items:center;justify-content:center;font-weight:700;font-size:.9rem;flex-shrink:0}
+.coin-info{flex:1;min-width:0}
+.coin-name{font-size:1rem;font-weight:700;color:var(--accent)}
+.coin-sub{font-size:.8rem;color:var(--muted);margin-top:.2rem}
+.coin-bar-wrap{width:100%;height:6px;background:var(--border);margin-top:.8rem;border-radius:3px;overflow:hidden}
+.coin-bar{height:6px;transition:width 1.2s cubic-bezier(0.22, 1, 0.36, 1)}
+.coin-cap{text-align:right}
+.coin-mcap{font-size:1rem;font-weight:700;color:var(--text)}
+.coin-chg{font-size:.75rem;margin-top:.2rem;font-weight:700}
+.chg-up{color:var(--accent)}.chg-dn{color:var(--red)}
+.mcap-detail{background:var(--card);border:1px solid var(--border);
+  padding:2.5rem;position:sticky;top:90px;transition:all .4s}
+.detail-header{display:flex;align-items:center;gap:1.2rem;margin-bottom:1.8rem;
+  padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+.detail-logo{width:56px;height:56px;border-radius:50%;display:flex;
+  align-items:center;justify-content:center;font-weight:700;font-size:1.2rem}
+.detail-name{font-family:var(--serif);font-size:1.8rem;font-weight:700;color:var(--accent)}
+.detail-ticker{font-size:.9rem;color:var(--muted);margin-top:.2rem;font-weight:600}
+.detail-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.8rem}
+.ds{background:var(--surface);border:1px solid var(--border);
+  padding:1rem 1.2rem;transition:transform .3s}
+.ds:hover{transform:translateY(-3px);border-color:var(--accent2)}
+.ds .dv{font-size:1.2rem;font-weight:700;color:var(--accent);margin-bottom:.2rem}
+.ds .dk{font-size:.75rem;color:var(--muted);letter-spacing:.05em;text-transform:uppercase}
+.detail-desc{font-size:1rem;color:var(--text);line-height:1.8}
+.chart-wrap{position:relative;height:220px;margin:2rem 0 0}
+
+/* ══════════════════════════
+   WORLD MAP SECTION
+══════════════════════════ */
+.map-layout{display:grid;grid-template-columns:1.8fr 1fr;gap:2.5rem;align-items:start}
+.map-container{background:var(--card);border:1px solid var(--border);
+  padding:1.5rem;position:relative}
+#world-svg{width:100%;height:auto;cursor:crosshair;display:block}
+.map-tooltip{position:absolute;background:var(--accent);color:#fff;
+  padding:1rem 1.2rem;pointer-events:none;opacity:0;
+  transition:opacity .2s, transform .2s;z-index:10;min-width:200px;max-width:260px;box-shadow:0 10px 25px rgba(0,0,0,.15);transform:translateY(10px)}
+.map-tooltip.show{opacity:1;transform:translateY(0)}
+.map-tooltip .tt-name{font-size:1rem;font-weight:700;margin-bottom:.5rem;font-family:var(--serif)}
+.map-tooltip .tt-row{font-size:.85rem;color:#e2e8f0;margin-bottom:.2rem;
+  display:flex;justify-content:space-between;gap:1rem}
+.map-tooltip .tt-val{color:#fff;font-weight:700}
+.country-panel{display:flex;flex-direction:column;gap:.8rem;max-height:550px;overflow-y:auto;padding-right:10px}
+.country-panel::-webkit-scrollbar{width:6px}
+.country-panel::-webkit-scrollbar-track{background:var(--surface)}
+.country-panel::-webkit-scrollbar-thumb{background:var(--border2)}
+.cp-item{background:var(--card);border:1px solid var(--border);
+  padding:1.2rem;cursor:pointer;transition:all .3s ease}
+.cp-item:hover{border-color:var(--accent);background:var(--surface);transform:translateX(5px)}
+.cp-item.selected{border-left:4px solid var(--red);background:var(--surface);transform:translateX(8px);box-shadow:0 4px 12px rgba(0,0,0,.05)}
+.cp-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem}
+.cp-name{font-size:1rem;font-weight:700;color:var(--accent)}
+.cp-badge{font-size:.65rem;font-weight:700;padding:.3em .6em;letter-spacing:.05em;background:#fff;border:1px solid var(--border2)}
+.cp-desc{font-size:.85rem;color:var(--soft);line-height:1.6}
+.map-legend{display:flex;gap:1.5rem;margin-top:1.5rem;flex-wrap:wrap;padding-top:1rem;border-top:1px solid var(--border)}
+.leg-item{display:flex;align-items:center;gap:.6rem;font-size:.8rem;color:var(--text);font-weight:600}
+.leg-dot{width:12px;height:12px;border:1px solid rgba(0,0,0,.1)}
 
 /* ══ FOOTER ══ */
-footer{padding:3rem 6vw;background:var(--accent);color:#fff;
+footer{position:relative;z-index:1;padding:3rem 6vw;
+  background:var(--accent);color:#fff;
   display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem}
-footer p{font-size:.85rem;opacity:.8}
+footer p{font-size:.85rem;opacity:.8;letter-spacing:.02em}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:1100px){
+  .nav-links{display:none} 
+}
+@media(max-width:900px){
+  .mcap-grid,.map-layout,.rwa-grid{grid-template-columns:1fr}
+  .mcap-detail{position:static}
+  .rwa-steps { border-left:none; padding-left:0; }
+  .rwa-step::before { display: none; }
+}
+@media(max-width:768px){
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .srow{flex-direction:column}
+  section{padding:7rem 5vw 4rem}
+  .wm{display:none}
+  .hero-stats{flex-direction:column}
+}
 </style>
 </head>
 <body>
@@ -109,11 +299,17 @@ footer p{font-size:.85rem;opacity:.8}
   <span class="nav-logo">Stablecoins <span>|</span> Analyse 2026</span>
   <ul class="nav-links">
     <li><a href="#hero">Accueil</a></li>
-    <li><a href="#risques">Risques</a></li>
-    <li><a href="#perturbations">Stabilité</a></li>
-    <li><a href="#sources">Sources</a></li>
+    <li><a href="#definition">Définition</a></li>
+    <li><a href="#usages">Usages</a></li>
+    <li><a href="#marketcap">Marchés</a></li>
+    <li><a href="#worldmap">Carte</a></li>
+    <li><a href="#virements">Paiements</a></li>
+    <li><a href="#rwa">RWA</a></li>
+    <li><a href="#yield">Yield</a></li>
+    <li><a href="#cbdc">CBDC</a></li>
+    <li><a href="#regulation">MiCA</a></li>
   </ul>
-  <a href="#sources" class="nav-cta">Guillaume THONGSOUM BOIS</a>
+  <a href="#sources" class="nav-cta">Sources</a>
 </nav>
 <div id="rpb"></div>
 
@@ -121,9 +317,249 @@ footer p{font-size:.85rem;opacity:.8}
 
 <section id="hero">
   <div class="inner">
-    <p class="ey rv">7 sources académiques · 2020–2025 · Guillaume THONGSOUM BOIS</p>
-    <h1 class="rv d1">L'Analyse des <em>Risques</em><br/>et la Stabilité Monétaire.</h1>
-    <p class="lead rv d2">Étude de l'impact des actifs numériques sur les canaux de transmission de la politique monétaire et les risques systémiques associés.</p>
+    <div class="htags rv">
+      <span class="htag">Finance Numérique</span>
+      <span class="htag">DeFi &amp; TradFi</span>
+      <span class="htag">Régulation MiCA 2026</span>
+    </div>
+    <h1 class="rv d1">Les <em>Stablecoins</em><br/>Le pont entre la finance<br/>traditionnelle et la blockchain.</h1>
+    <p class="lead rv d2">Analyse économique approfondie, cas d'usage concrets et défis réglementaires d'une technologie qui remodèle le système monétaire mondial.</p>
+    <div class="hero-stats rv d3">
+      <div class="hstat"><div class="v" style="color:var(--accent)">$215 Mds</div><div class="l">Capitalisation totale</div></div>
+      <div class="hstat"><div class="v" style="color:var(--accent)">3</div><div class="l">Modèles principaux</div></div>
+      <div class="hstat"><div class="v" style="color:var(--accent)">150+</div><div class="l">Pays utilisateurs</div></div>
+      <div class="hstat" style="border-left-color:var(--red)"><div class="v" style="color:var(--red)">~40 Mds$</div><div class="l">Perdus — UST 2022</div></div>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    Parcourir l'analyse
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="volatilite" class="alt">
+  <div class="wm">01</div>
+  <div class="inner">
+    <p class="ey rv">Problématique</p>
+    <h2 class="rv">Le problème fondamental<br/>de la <em>volatilité</em></h2>
+    <ul class="bl">
+      <li class="rv"><div class="dot r"></div><span><strong>Bitcoin / Ethereum — Volatilité inhérente extrême :</strong> des variations de ±20 % en quelques heures sont courantes. Incompatible avec toute logique contractuelle ou commerciale stable. <span class="tag tr">Risque élevé</span></span></li>
+      <li class="rv d1"><div class="dot r"></div><span><strong>Incompatibilité fonctionnelle :</strong> inadaptés aux trois fonctions classiques de la monnaie — <em>unité de compte</em>, <em>intermédiaire des échanges</em> et <em>réserve de valeur à court terme</em>. Un prix libellé en BTC change de sens d'une heure à l'autre.</span></li>
+      <li class="rv d2"><div class="dot"></div><span><strong>Besoin structurel :</strong> la crypto-économie nécessite une ancre de valeur stable — contrats DeFi, salaires on-chain, commerce inter-protocoles. Tous exigent un dénominateur commun prévisible.</span></li>
+    </ul>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="definition">
+  <div class="wm">02</div>
+  <div class="inner">
+    <p class="ey rv">Définition</p>
+    <h2 class="rv">Qu'est-ce qu'un <em>Stablecoin ?</em></h2>
+    <div class="def rv">
+      <p>Un <strong>stablecoin</strong> est un actif numérique dont la valeur est <strong>arrimée (peg)</strong> à un actif de référence stable — le plus souvent le dollar américain (USD) — via différents mécanismes de collatéralisation ou d'algorithmes monétaires conçus pour absorber les chocs de marché.</p>
+    </div>
+    <div class="g3 rv d1">
+      <div class="mc"><div class="mi">🏦</div><div class="ml">Fiat-collatéralisé</div><div class="md">Réserves en USD détenues par un émetteur centralisé. Modèle dominant du marché.</div><div class="me">USDT · USDC · FDUSD</div></div>
+      <div class="mc"><div class="mi">⛓️</div><div class="ml">Crypto-collatéralisé</div><div class="md">Sur-collatéralisation en actifs crypto pour absorber la volatilité.</div><div class="me">DAI · crvUSD · LUSD</div></div>
+      <div class="mc"><div class="mi">⚙️</div><div class="ml">Algorithmique</div><div class="md">Parité maintenue via mécanismes d'offre/demande automatisés.</div><div class="me">UST (†) · FRAX · USDe</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="usages" class="alt">
+  <div class="wm">03</div>
+  <div class="inner">
+    <p class="ey rv">Cas d'usage</p>
+    <h2 class="rv">Utilité &amp; applications <em>concrètes</em></h2>
+    <div class="g2 rv d1">
+      <div class="card"><div class="card-ico">🛡️</div><div class="card-title">Refuge contre la volatilité</div><p>Conversion instantanée des gains en stablecoins pour un <em>risk-off</em> immédiat sans quitter l'écosystème crypto, disponible 24h/24. <span class="tag tv">Trading</span></p></div>
+      <div class="card"><div class="card-ico">⚡</div><div class="card-title">Carburant de la DeFi</div><p>Principal collatéral dans les protocoles de prêt (Aave, Compound) et les AMM (Uniswap, Curve). Des milliards de TVL adossés à l'USDC. <span class="tag tt">DeFi</span></p></div>
+      <div class="card"><div class="card-ico">🌍</div><div class="card-title">Paiements transfrontaliers</div><p>Transferts quasi-instantanés à coût marginal nul entre continents — sans SWIFT ni intermédiaire bancaire. Révolutionnaire pour les <em>remittances</em>. <span class="tag ty">Remittances</span></p></div>
+      <div class="card"><div class="card-ico">💰</div><div class="card-title">Épargne en pays à forte inflation</div><p>Accès à l'équivalent-dollar sans compte bancaire USD. En Argentine, Turquie, Nigéria : une bouée financière réelle pour des millions de personnes.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="marketcap">
+  <div class="wm">04</div>
+  <div class="inner">
+    <p class="ey rv">Marchés</p>
+    <h2 class="rv">Capitalisation des <em>principaux stablecoins</em></h2>
+    <div class="mcap-grid rv d1">
+      <div class="mcap-list" id="coin-list"></div>
+      <div class="mcap-detail" id="coin-detail">
+        <div style="text-align:center;color:var(--muted);font-size:1rem;padding:3rem 0;font-style:italic">← Sélectionnez un stablecoin pour voir les détails</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="worldmap" class="alt">
+  <div class="wm">05</div>
+  <div class="inner">
+    <p class="ey rv">Géographie</p>
+    <h2 class="rv">Carte mondiale de <em>l'adoption</em></h2>
+    <p class="lead rv" style="margin-bottom:1.5rem">Survolez ou cliquez sur un pays pour explorer les spécificités locales de l'adoption des stablecoins.</p>
+    <div class="map-layout rv d1">
+      <div>
+        <div class="map-container">
+          <svg id="world-svg" viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg"></svg>
+          <div class="map-tooltip" id="map-tooltip"></div>
+          <div class="map-legend">
+            <div class="leg-item"><div class="leg-dot" style="background:#002868"></div>Adoption très forte</div>
+            <div class="leg-item"><div class="leg-dot" style="background:#2b6cb0"></div>Adoption forte</div>
+            <div class="leg-item"><div class="leg-dot" style="background:#90cdf4"></div>Adoption modérée</div>
+          </div>
+        </div>
+      </div>
+      <div class="country-panel" id="country-panel"></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="geopolitique">
+  <div class="wm">06</div>
+  <div class="inner">
+    <p class="ey rv">Géopolitique</p>
+    <h2 class="rv">Dollarisation numérique &amp; <em>hégémonie monétaire</em></h2>
+    <ul class="bl">
+      <li class="rv"><div class="dot y"></div><span><strong>Fuite vers le dollar dans les pays émergents :</strong> adoption massive en Argentine (inflation >100 %), au Nigéria (dépréciation du naira) et en Turquie (crise de la lire). Les stablecoins USD y jouent le rôle de matelas monétaire accessible à tous. <span class="tag ty">Marchés émergents</span></span></li>
+      <li class="rv d1"><div class="dot y"></div><span><strong>Outil d'hégémonie dollar :</strong> les stablecoins en USD amplifient la dollarisation mondiale sans action directe des autorités américaines — un vecteur de <em>soft power</em> monétaire inédit. Certains économistes parlent de « Trojan Dollar ».</span></li>
+      <li class="rv d2"><div class="dot"></div><span><strong>Contournement des contrôles de capitaux :</strong> permis par la pseudonymité et la décentralisation — impossible à bloquer avec les outils de politique monétaire traditionnels.</span></li>
+    </ul>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="virements" class="alt">
+  <div class="wm">07</div>
+  <div class="inner">
+    <p class="ey rv">Paiements Transfrontaliers</p>
+    <h2 class="rv">Le paradigme <em>SWIFT & SEPA face aux Stablecoins</em></h2>
+    <p class="lead rv">Les systèmes bancaires traditionnels, bien que fiables, reposent sur des architectures fragmentées datant souvent des années 70 (SWIFT). Les stablecoins introduisent un règlement quasi-instantané et universel en pair-à-pair.</p>
+    
+    <div class="comp-table-wrap rv d1">
+      <table class="wh-table">
+        <thead>
+          <tr>
+            <th>Caractéristique</th>
+            <th>SEPA (Zone Euro)</th>
+            <th>SWIFT (International)</th>
+            <th>Stablecoins (Blockchain)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Portée géographique</strong></td>
+            <td>Régionale (36 pays européens)</td>
+            <td>Mondiale (+200 pays)</td>
+            <td class="col-stable">Universelle (Internet)</td>
+          </tr>
+          <tr>
+            <td><strong>Vitesse d'exécution</strong></td>
+            <td>1 à 2 jours ouvrés (ou Instant SEPA)</td>
+            <td>2 à 5 jours ouvrés</td>
+            <td class="col-stable">Quelques secondes (ex: Solana, Polygon)</td>
+          </tr>
+          <tr>
+            <td><strong>Disponibilité</strong></td>
+            <td>Jours ouvrés bancaires</td>
+            <td>Jours ouvrés, heures d'ouverture</td>
+            <td class="col-stable">24h/24, 7j/7, 365j/an</td>
+          </tr>
+          <tr>
+            <td><strong>Coûts de transaction</strong></td>
+            <td>Généralement gratuit ou très faible</td>
+            <td>Élevés (frais fixes + taux de change + correspondants)</td>
+            <td class="col-stable">Fractions de centimes (sur L2) à quelques dollars</td>
+          </tr>
+          <tr>
+            <td><strong>Intermédiaires</strong></td>
+            <td>Banque émettrice & réceptrice + Clearing</td>
+            <td>Réseau complexe de banques correspondantes</td>
+            <td class="col-stable">Aucun (Pair-à-pair direct)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="rwa">
+  <div class="wm">08</div>
+  <div class="inner">
+    <p class="ey rv">Tokénisation</p>
+    <h2 class="rv">L'ère des <em>Real World Assets (RWA)</em></h2>
+    
+    <div class="rwa-grid rv d1">
+      <div class="rwa-text">
+        <p>Les <strong>Real World Assets (RWA)</strong> représentent la numérisation et la représentation sur une blockchain d'actifs tangibles ou financiers traditionnels (immobilier, matières premières, art, et surtout <strong>bons du Trésor</strong>).</p>
+        <p>Les stablecoins (comme l'USDC) agissent comme la monnaie de règlement essentielle pour acheter, vendre ou percevoir les dividendes de ces RWA directement <em>on-chain</em>. C'est la fusion ultime entre la Finance Traditionnelle (TradFi) et la DeFi.</p>
+        <p>Le cas le plus frappant est le fonds <strong>BUIDL de BlackRock</strong> : un fonds tokenisé adossé aux bons du Trésor américain, offrant un rendement directement versé sur les portefeuilles crypto des investisseurs qualifiés.</p>
+      </div>
+      
+      <div class="rwa-steps alt" style="padding: 2rem; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.03);">
+        <div class="rwa-step">
+          <h4>1. L'Actif Réel (Off-chain)</h4>
+          <p>Un actif traditionnel (ex: bons du Trésor US) est acheté et sécurisé par un dépositaire institutionnel régulé.</p>
+        </div>
+        <div class="rwa-step highlight-step">
+          <h4>2. La Tokénisation</h4>
+          <p>Un contrat intelligent (Smart Contract) émet des jetons numériques représentant légalement la propriété fractionnée de cet actif physique.</p>
+        </div>
+        <div class="rwa-step">
+          <h4>3. La Liquidité Blockchain</h4>
+          <p>Les investisseurs peuvent échanger ces jetons 24/7 sur la blockchain, en utilisant des <strong>stablecoins</strong> pour le règlement immédiat.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="tradfi" class="alt">
+  <div class="wm">09</div>
+  <div class="inner">
+    <p class="ey rv">Finance Traditionnelle</p>
+    <h2 class="rv">L'entrée des acteurs <em>institutionnels</em></h2>
+    <div class="g2 rv d1">
+      <div class="card"><div class="card-ico">🏧</div><div class="card-title">PayPal — PYUSD</div><p>Premier stablecoin émis par un géant du paiement Web2. Validation institutionnelle majeure de la technologie. Déployé initialement pour les utilisateurs américains, désormais en expansion globale.</p></div>
+      <div class="card"><div class="card-ico">💳</div><div class="card-title">Visa &amp; Mastercard</div><p>Intégration du règlement en USDC sur le réseau Visa. Délais réduits de T+2 à quasi-instantané. Réduction significative des coûts de clearing interbancaire.</p></div>
+      <div class="card"><div class="card-ico">🏛</div><div class="card-title">Expérimentations BRI</div><p>BIS Innovation Hub : règlement interbancaire via stablecoins (Projet mBridge, Projet Jura). La frontière TradFi/DeFi se dissout progressivement.</p></div>
+      <div class="card"><div class="card-ico">🏦</div><div class="card-title">Société Générale — EURCV</div><p>Lancement par SG-FORGE du premier stablecoin institutionnel adossé à l'Euro et conforme MiCA, ciblant les investisseurs professionnels.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="yield">
+  <div class="wm">10</div>
+  <div class="inner">
+    <p class="ey rv">Innovation</p>
+    <h2 class="rv">Yield-bearing Stablecoins :<br/><em>la nouvelle génération</em></h2>
+    <ul class="bl">
+      <li class="rv"><div class="dot"></div><span><strong>Transition majeure :</strong> du stablecoin passif (simple réserve de valeur) au stablecoin productif générant un rendement natif pour le détenteur — sans action requise. Un véritable compte épargne on-chain. <span class="tag ty">Yield</span></span></li>
+      <li class="rv d1"><div class="dot"></div><span><strong>Modèle Delta-neutral — USDe d'Ethena :</strong> combine détention de crypto avec positions short sur marchés dérivés pour neutraliser la volatilité et capturer le <em>funding rate</em>. Rendements de 5–15 % selon les conditions de marché.</span></li>
+      <li class="rv d2"><div class="dot"></div><span><strong>Modèle Staking :</strong> stablecoins adossés à de l'ETH staké (sDAI, wstETH-backed). Le rendement provient des récompenses de validation du réseau Ethereum — source intrinsèque et décentralisée.</span></li>
+      <li class="rv d3"><div class="dot r"></div><span><strong>Nouveaux risques systémiques :</strong> corrélation avec la volatilité des taux de financement, risque de contrepartie sur les exchanges, spirale négative en cas de stress de marché. <span class="tag tr">Risque systémique</span></span></li>
+    </ul>
   </div>
 </section>
 
@@ -132,68 +568,53 @@ footer p{font-size:.85rem;opacity:.8}
 <section id="risques" class="alt">
   <div class="wm">11</div>
   <div class="inner">
-    <p class="ey rv">Risques Systémiques</p>
-    <h2 class="rv">Le traumatisme <em>Terra / Luna</em></h2>
-    <div class="g3 rv d1">
-      <div class="card">
-        <div class="card-ico">📉</div>
-        <div class="card-title">Effondrement UST</div>
-        <p>Environ 40 Mds$ détruits en 72h lors de la rupture de l'ancrage algorithmique en mai 2022. [cite: 1]</p>
-      </div>
-      <div class="card">
-        <div class="card-ico">🔥</div>
-        <div class="card-title">Spirale Mortelle</div>
-        <p>Le mécanisme d'arbitrage entre UST et LUNA a provoqué une hyperinflation du jeton de gouvernance. [cite: 1]</p>
-      </div>
-      <div class="card">
-        <div class="card-ico">⚖️</div>
-        <div class="card-title">Réponse MiCA</div>
-        <p>Ce crash a catalysé la mise en place de réserves 1:1 obligatoires dans l'Union Européenne. [cite: 5]</p>
-      </div>
+    <p class="ey rv">Risques</p>
+    <h2 class="rv">Risques &amp; le traumatisme <em>Terra / Luna</em></h2>
+    <div class="srow rv">
+      <div class="sbox"><div class="sv">~40 Mds$</div><div class="sl">Détruits en 72h — effondrement UST, mai 2022</div></div>
+      <div class="sbox"><div class="sv">72h</div><div class="sl">Durée de la spirale mortelle LUNA / UST</div></div>
+      <div class="sbox"><div class="sv">41 M$</div><div class="sl">Settlement Tether / DOJ pour fraude sur réserves</div></div>
+    </div>
+    <ul class="bl rv d1">
+      <li><div class="dot r"></div><span><strong>Risque de De-peg :</strong> perte de l'ancrage à l'actif de référence — peut déclencher des <em>bank runs</em> numériques massifs en quelques heures. Les mécanismes algorithmiques sont particulièrement vulnérables. <span class="tag tr">De-peg</span></span></li>
+      <li><div class="dot r"></div><span><strong>L'effondrement de l'UST (mai 2022) :</strong> spirale mort entre UST et LUNA. Un cygne noir qui a détruit la confiance dans les modèles algorithmiques non collatéralisés et catalysé la vague réglementaire mondiale. <span class="tag tr">Black Swan</span></span></li>
+      <li><div class="dot"></div><span><strong>Opacité des réserves Tether :</strong> USDT (~110 Mds$ en circulation) poursuivi pour déclarations trompeuses. Risque systémique majeur : une défaillance paralyserait l'ensemble de l'écosystème crypto.</span></li>
+    </ul>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="cbdc">
+  <div class="wm">12</div>
+  <div class="inner">
+    <p class="ey rv">Monnaies Souveraines</p>
+    <h2 class="rv">La réponse des banques centrales : <em>MNBC & CBDC</em></h2>
+    
+    <div class="def rv">
+      <p>Une <strong>Monnaie Numérique de Banque Centrale (MNBC / CBDC)</strong> est la version numérique de la monnaie fiduciaire d'un État, émise et régulée directement par sa banque centrale. Contrairement aux stablecoins privés, elle constitue un engagement direct de l'État.</p>
+    </div>
+
+    <div class="g2 rv d1">
+      <div class="card"><div class="card-ico">🇪🇺</div><div class="card-title">Euro Numérique (BCE)</div><p>Actuellement en phase de préparation. Conçu pour offrir une alternative publique souveraine aux paiements numériques européens, avec une limite de détention (probablement autour de 3000 €) pour éviter les fuites de dépôts bancaires.</p></div>
+      <div class="card"><div class="card-ico">🇨🇳</div><div class="card-title">e-CNY (Yuan Numérique)</div><p>Le projet le plus avancé au monde parmi les grandes économies. Déjà testé massivement dans plusieurs provinces chinoises, il permet un contrôle accru et une traçabilité totale des transactions par la banque centrale.</p></div>
+      <div class="card"><div class="card-ico">🇺🇸</div><div class="card-title">FedNow & Dollar Numérique</div><p>La Réserve Fédérale reste prudente sur l'émission d'une CBDC, privilégiant d'abord la modernisation des paiements avec le système instantané <strong>FedNow</strong> lancé en 2023, tout en laissant le secteur privé innover avec les stablecoins.</p></div>
+      <div class="card"><div class="card-ico">🌉</div><div class="card-title">Projet mBridge (BRI)</div><p>Plateforme multi-CBDC développée par la Banque des Règlements Internationaux associant la Chine, Hong Kong, la Thaïlande et les EAU. L'objectif : contourner le réseau SWIFT et fluidifier les paiements transfrontaliers institutionnels.</p></div>
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<section id="perturbations">
-  <div class="wm">12</div>
+<section id="regulation" class="alt">
+  <div class="wm">13</div>
   <div class="inner">
-    <p class="ey rv">Transmission Monétaire</p>
-    <h2 class="rv">Les 3 canaux de <em>perturbation</em></h2>
-    <p class="lead rv">Comment les stablecoins impactent la souveraineté des banques centrales. <strong>Source : Billet BCE No 416 & BIS WP 905.</strong> [cite: 1, 3, 4]</p>
-    
-    <div class="g3 rv d1">
-      <div class="card">
-        <div class="card-ico" style="color:var(--red)">📉</div>
-        <div class="card-title">Dépôts bancaires</div>
-        <p>Les ménages déplacent leur épargne vers les stablecoins. Les banques perdent une source de financement stable, augmentant le coût du crédit. [cite: 3, 4]</p>
-        <div style="margin-top:1rem; padding-top:1rem; border-top:1px solid var(--border); font-size:0.85rem; color:var(--red); font-weight:700;">
-          Impact BCE : 100 Mds$ de dépôts ≈ -50 Mds$ de prêts. [cite: 4]
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-ico" style="color:var(--accent)">⚖️</div>
-        <div class="card-title">Liquidité interbancaire</div>
-        <p>La baisse de la demande de monnaie centrale affaiblit le pilotage des taux directeurs par la Banque Centrale. [cite: 1, 4]</p>
-        <div style="margin-top:1rem; padding-top:1rem; border-top:1px solid var(--border); font-size:0.85rem; color:var(--accent); font-weight:700;">
-          Affaiblissement du pilotage des taux. [cite: 3]
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-ico" style="color:var(--teal)">🏛️</div>
-        <div class="card-title">Actifs sans risque</div>
-        <p>Les émetteurs achètent massivement des bons du Trésor US court terme, influençant les rendements et le marché REPO. [cite: 1, 3]</p>
-        <div style="margin-top:1rem; padding-top:1rem; border-top:1px solid var(--border); font-size:0.85rem; color:var(--teal); font-weight:700;">
-          Pression sur les rendements souverains. [cite: 1]
-        </div>
-      </div>
-    </div>
-
-    <div class="rv d2" style="margin-top:2.5rem; padding:1.5rem; background:var(--surface); border-left:4px solid var(--accent)">
-      <p style="font-size:0.95rem;"><strong>Analyse Empirique (BCE 2025) :</strong> L'effet est actuellement <em>non-linéaire</em>. Une hausse de 10 Mds$ d'USDT réduit le SOFR de seulement 0,7 point de base, mais l'impact pourrait devenir massif avec l'adoption grand public. [cite: 3, 4]</p>
+    <p class="ey rv">Régulation</p>
+    <h2 class="rv">Actualités &amp; le tournant <em>réglementaire MiCA</em></h2>
+    <div class="g2 rv d1">
+      <div class="card"><div class="card-ico">🇪🇺</div><div class="card-title">Europe — Règlement MiCA</div><p>Application progressive 2024–2025. Réserves 1:1 obligatoires, agrément EMT/ART requis. USDT non-conforme — retrait progressif des exchanges européens (Bitstamp, Kraken EU). Cadre le plus avancé au monde.</p></div>
+      <div class="card"><div class="card-ico">🇺🇸</div><div class="card-title">États-Unis — Clarification en cours</div><p>Cadre législatif en débat : STABLE Act, GENIUS Act. Compétition institutionnelle entre Fed, OCC et CFTC sur la supervision. Loi fédérale sur les stablecoins attendue prochainement.</p></div>
+      <div class="card"><div class="card-ico">🌐</div><div class="card-title">Coordination Internationale</div><p>BRI : recommandations sur la stabilité financière mondiale. FSB : cadre pour la supervision transfrontalière. Le G20 comme enceinte de coordination émergente sur les « Global Stablecoins ».</p></div>
     </div>
   </div>
 </section>
@@ -201,14 +622,19 @@ footer p{font-size:.85rem;opacity:.8}
 <div class="divider"></div>
 
 <section id="sources">
+  <div class="wm">14</div>
   <div class="inner">
-    <p class="ey rv">Bibliographie</p>
-    <h2 class="rv">Références <em>Académiques</em></h2>
-    <div class="rv d1" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:1rem;">
-      <p style="font-size:.85rem; color:var(--soft)">[1] BIS WP 905 · Arner, Auer & Frost · 2020</p>
-      <p style="font-size:.85rem; color:var(--soft)">[2] Banque de France · Bénassy-Quéré · 2025</p>
-      <p style="font-size:.85rem; color:var(--soft)">[3] Billet BCE 416 · Dufouleur · 2025</p>
-      <p style="font-size:.85rem; color:var(--soft)">[4] BCE WP 3199 · Altavilla et al. · 2025</p>
+    <p class="ey rv">Références</p>
+    <h2 class="rv">Sources &amp; <em>Bibliographie</em></h2>
+    <div class="g4 rv d1">
+      <div class="src"><div class="d"></div><p><strong>BRI (Banque des Règlements Internationaux)</strong> — Rapports sur la stabilité financière et les paiements numériques. bis.org</p></div>
+      <div class="src"><div class="d"></div><p><strong>Banque Centrale Européenne (BCE)</strong> — Rapports Crypto-Assets et projet Euro numérique. ecb.europa.eu</p></div>
+      <div class="src"><div class="d"></div><p><strong>Règlement MiCA</strong> — Textes officiels UE, Règlement (UE) 2023/1114. eur-lex.europa.eu</p></div>
+      <div class="src"><div class="d"></div><p><strong>CoinGecko</strong> — Données de marché et capitalisation en temps réel. coingecko.com</p></div>
+      <div class="src"><div class="d"></div><p><strong>DefiLlama</strong> — Données on-chain, TVL, protocoles DeFi. defillama.com</p></div>
+      <div class="src"><div class="d"></div><p><strong>BlackRock & BUIDL</strong> — Documentation officielle sur le fonds institutionnel de liquidité numérique.</p></div>
+      <div class="src"><div class="d"></div><p><strong>Chainalysis</strong> — Crypto Crime Report &amp; Geography of Cryptocurrency, édition 2024.</p></div>
+      <div class="src"><div class="d"></div><p><strong>Gorton &amp; Zhang (2021)</strong> — « Taming Wildcat Stablecoins », University of Chicago Law Review.</p></div>
     </div>
   </div>
 </section>
@@ -216,23 +642,265 @@ footer p{font-size:.85rem;opacity:.8}
 </main>
 
 <footer>
-  <p>Stablecoins — Analyse Académique · Guillaume THONGSOUM BOIS</p>
-  <p>Finance Numérique 2026</p>
+  <p>Stablecoins — Analyse Académique · Finance Numérique 2026</p>
+  <p>Sources : BRI · BCE · MiCA · CoinGecko · DefiLlama</p>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-// Animation au scroll
+/* ════════════════════════
+   MARKET CAP DATA
+════════════════════════ */
+const COINS=[
+  {id:'usdt',name:'Tether',ticker:'USDT',logo:'TH',color:'#002868',
+   mcap:112.4,peg:'USD',colateral:'Fiat (USD, bons Trésor US)',founded:2014,
+   chain:'Multi-chain',change:+0.12,
+   desc:'Tether (USDT) est le stablecoin le plus utilisé au monde. Émis par Tether Ltd, il est adossé à des réserves en dollars américains et bons du Trésor US. Malgré des controverses sur la transparence de ses réserves, il représente plus de 50 % du marché total des stablecoins.',
+   history:[112,111,113,110,112,114,113,112,111,113,112,114]},
+  {id:'usdc',name:'USD Coin',ticker:'USDC',logo:'US',color:'#2b6cb0',
+   mcap:44.8,peg:'USD',colateral:'Fiat (USD)',founded:2018,
+   chain:'Multi-chain',change:+0.08,
+   desc:'USDC est émis par Circle en partenariat avec Coinbase. Considéré comme le stablecoin le plus transparent grâce à ses attestations mensuelles par un cabinet d\'audit indépendant. Pleinement conforme aux exigences MiCA en Europe.',
+   history:[44,45,43,45,44,46,45,44,43,45,44,45]},
+  {id:'dai',name:'DAI',ticker:'DAI',logo:'DA',color:'#4a5568',
+   mcap:5.4,peg:'USD',colateral:'Crypto (ETH, WBTC, RWA)',founded:2017,
+   chain:'Ethereum / L2',change:-0.03,
+   desc:'DAI est un stablecoin décentralisé émis par le protocole MakerDAO. Maintenu par sur-collatéralisation en actifs crypto et RWA. Pionnier de la DeFi, il incarne la vision d\'une monnaie stable sans émetteur centralisé.',
+   history:[5.2,5.3,5.1,5.4,5.3,5.5,5.4,5.3,5.2,5.4,5.3,5.4]},
+  {id:'usde',name:'USDe — Ethena',ticker:'USDe',logo:'UE',color:'#718096',
+   mcap:5.8,peg:'USD',colateral:'Delta-neutral (BTC/ETH + short)',founded:2024,
+   chain:'Ethereum',change:+1.2,
+   desc:'USDe est un stablecoin synthétique delta-neutral innovant d\'Ethena Labs. Il combine détention de BTC/ETH avec des positions short sur les marchés dérivés pour capturer le funding rate. Rendements de 5–20 %. Représente la nouvelle génération de yield-bearing stablecoins.',
+   history:[0.5,1.2,2.8,3.5,4.2,5.0,5.3,5.5,5.6,5.7,5.8,5.8]},
+  {id:'pyusd',name:'PayPal USD',ticker:'PYUSD',logo:'PP',color:'#1a365d',
+   mcap:1.1,peg:'USD',colateral:'Fiat (USD)',founded:2023,
+   chain:'Ethereum / Solana',change:+0.5,
+   desc:'PYUSD est le stablecoin de PayPal, lancé en 2023. Il marque l\'entrée officielle d\'un géant du paiement Web2 dans l\'écosystème crypto. Émis par Paxos Trust, il est adossé à 100 % à des dépôts USD et bons du Trésor à court terme.',
+   history:[0.1,0.2,0.4,0.5,0.6,0.8,0.9,1.0,1.0,1.1,1.1,1.1]},
+  {id:'frax',name:'Frax',ticker:'FRAX',logo:'FR',color:'#2d3748',
+   mcap:0.8,peg:'USD',colateral:'Hybride (fiat + algo → v3 full fiat)',founded:2020,
+   chain:'Multi-chain',change:-0.8,
+   desc:'Frax est le premier stablecoin à modèle hybride — partiellement collatéralisé en USDC et partiellement algorithmique. Après la chute de l\'UST, Frax s\'est progressivement orienté vers un modèle entièrement collatéralisé (FRAX v3) pour regagner la confiance.',
+   history:[2.1,1.8,1.5,1.3,1.1,1.0,0.95,0.9,0.85,0.83,0.81,0.8]},
+];
+const maxMcap=Math.max(...COINS.map(c=>c.mcap));
+let chartInst=null;
+
+function renderCoinList(){
+  const list=document.getElementById('coin-list');
+  list.innerHTML='';
+  COINS.forEach((c,i)=>{
+    const pct=((c.mcap/maxMcap)*100).toFixed(1);
+    const up=c.change>=0;
+    const row=document.createElement('div');
+    row.className='coin-row';row.dataset.id=c.id;
+    row.innerHTML=`
+      <div class="coin-logo" style="background:${c.color}15;color:${c.color}">${c.logo}</div>
+      <div class="coin-info">
+        <div class="coin-name">${c.name} <span style="font-size:.75rem;color:var(--muted);font-weight:500">${c.ticker}</span></div>
+        <div class="coin-sub">${c.chain}</div>
+        <div class="coin-bar-wrap"><div class="coin-bar" style="width:0;background:${c.color}" data-w="${pct}%"></div></div>
+      </div>
+      <div class="coin-cap">
+        <div class="coin-mcap">$${c.mcap.toFixed(1)} Mds</div>
+        <div class="coin-chg ${up?'chg-up':'chg-dn'}">${up?'▲':'▼'} ${Math.abs(c.change).toFixed(2)}%</div>
+      </div>`;
+    row.addEventListener('click',()=>selectCoin(c.id));
+    list.appendChild(row);
+    setTimeout(()=>{row.querySelector('.coin-bar').style.width=pct+'%'},150+i*80);
+  });
+}
+
+function selectCoin(id){
+  document.querySelectorAll('.coin-row').forEach(r=>r.classList.remove('selected'));
+  const row=document.querySelector(.coin-row[data-id="${id}"]);
+  if(row)row.classList.add('selected');
+  const c=COINS.find(x=>x.id===id);if(!c)return;
+  const up=c.change>=0;
+  document.getElementById('coin-detail').innerHTML=`
+    <div class="detail-header">
+      <div class="detail-logo" style="background:${c.color}15;color:${c.color}">${c.logo}</div>
+      <div><div class="detail-name">${c.name}</div><div class="detail-ticker">${c.ticker} · ${c.chain}</div></div>
+    </div>
+    <div class="detail-stats">
+      <div class="ds"><div class="dv">$${c.mcap.toFixed(1)} Mds</div><div class="dk">Capitalisation</div></div>
+      <div class="ds"><div class="dv" style="color:${up?'var(--accent)':'var(--red)'}">${up?'▲':'▼'} ${Math.abs(c.change).toFixed(2)}%</div><div class="dk">Variation 24h</div></div>
+      <div class="ds"><div class="dv" style="font-size:.9rem">${c.colateral}</div><div class="dk">Collatéral</div></div>
+      <div class="ds"><div class="dv">${c.founded}</div><div class="dk">Lancé en</div></div>
+    </div>
+    <div class="detail-desc">${c.desc}</div>
+    <div class="chart-wrap"><canvas id="coin-chart"></canvas></div>`;
+  if(chartInst)chartInst.destroy();
+  chartInst=new Chart(document.getElementById('coin-chart'),{
+    type:'line',
+    data:{
+      labels:['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'],
+      datasets:[{label:'Capitalisation (Mds$)',data:c.history,
+        borderColor:c.color,borderWidth:2,
+        backgroundColor:c.color+'15',fill:true,
+        pointBackgroundColor:c.color,pointRadius:3,pointHoverRadius:5,tension:.4}]
+    },
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},
+        tooltip:{mode:'index',intersect:false,callbacks:{label:ctx=>$${ctx.parsed.y.toFixed(1)} Mds}}},
+      scales:{
+        x:{grid:{color:'#f1f5f9'},ticks:{color:'#475569',font:{size:11}}},
+        y:{grid:{color:'#f1f5f9'},ticks:{color:'#475569',font:{size:11},callback:v=>$${v}M}}
+      }
+    }
+  });
+}
+
+/* ════════════════════════
+   WORLD MAP
+════════════════════════ */
+const COUNTRIES=[
+  {id:'us',  name:'États-Unis',  level:'high',cx:145,cy:180,
+   usage:'$110 Mds+ en circulation. Berceau de USDC et USDT. Législation fédérale en cours (STABLE Act).',
+   top:'USDT, USDC, PYUSD',volume:'$120 Mds/jour'},
+  {id:'arg', name:'Argentine',   level:'high',cx:215,cy:308,
+   usage:'Inflation >100 % pousse la population vers les stablecoins USD. Adoption parmi les plus fortes au monde.',
+   top:'USDT, DAI',volume:'$4 Mds/mois'},
+  {id:'ng',  name:'Nigéria',     level:'high',cx:390,cy:222,
+   usage:'Forte adoption malgré les restrictions de la banque centrale. Dépréciation du naira accélère l\'usage.',
+   top:'USDT, USDC',volume:'$2 Mds/mois'},
+  {id:'tr',  name:'Turquie',     level:'high',cx:452,cy:148,
+   usage:'Crise de la lire turque. Stablecoins utilisés massivement pour protéger l\'épargne.',
+   top:'USDT, USDC',volume:'$3.5 Mds/mois'},
+  {id:'eu',  name:'Europe (UE)', level:'med', cx:408,cy:128,
+   usage:'Cadre MiCA en vigueur. USDT retiré de certains exchanges EU. USDC et EURC en progression.',
+   top:'USDC, EURC',volume:'$15 Mds/jour'},
+  {id:'cn',  name:'Chine',       level:'med', cx:610,cy:168,
+   usage:'Accès restreint aux stablecoins USD. Développement actif du e-CNY (CBDC). Marchés gris via P2P.',
+   top:'e-CNY (CBDC)',volume:'N/A officiel'},
+  {id:'in',  name:'Inde',        level:'med', cx:545,cy:195,
+   usage:'Cadre réglementaire en construction. Fort volume de remittances. Taxe de 30 % sur les cryptos.',
+   top:'USDT, USDC',volume:'$3 Mds/mois'},
+  {id:'br',  name:'Brésil',      level:'med', cx:228,cy:278,
+   usage:'Marché en forte croissance. DREX (CBDC brésilienne) en phase pilote. Stablecoins pour remittances.',
+   top:'USDT, USDC',volume:'$5 Mds/mois'},
+  {id:'ru',  name:'Russie',      level:'low', cx:530,cy:100,
+   usage:'Sanctions internationales accélèrent l\'usage pour contourner le système SWIFT.',
+   top:'USDT',volume:'~$6 Mds/mois estimé'},
+  {id:'vn',  name:'Vietnam',     level:'med', cx:612,cy:210,
+   usage:'L\'un des marchés crypto les plus actifs en Asie du Sud-Est. Fort usage des stablecoins pour les échanges P2P.',
+   top:'USDT',volume:'$2 Mds/mois'},
+];
+const LC={'high':'#002868','med':'#2b6cb0','low':'#90cdf4'}; 
+
+function buildMap(){
+  const svg=document.getElementById('world-svg');
+  const panel=document.getElementById('country-panel');
+  const lands=[
+    'M85,100 L95,82 L115,76 L140,73 L165,70 L188,68 L208,74 L218,86 L222,100 L218,118 L208,135 L196,152 L182,168 L168,180 L155,192 L148,210 L152,228 L156,244 L150,255 L140,250 L132,238 L120,224 L112,210 L104,196 L96,180 L89,162 L86,142 L84,120Z',
+    'M155,240 L168,234 L178,238 L180,250 L172,258 L160,254 L153,246Z',
+    'M178,252 L195,246 L216,250 L236,258 L252,268 L260,284 L262,302 L258,322 L250,338 L240,350 L226,356 L210,354 L198,346 L188,332 L180,316 L175,298 L174,278Z',
+    'M352,82 L372,76 L396,74 L422,76 L440,84 L450,94 L450,108 L440,118 L418,124 L394,122 L370,116 L354,106 L349,96Z',
+    'M352,132 L376,126 L402,130 L422,138 L432,154 L434,174 L428,196 L418,218 L404,238 L388,252 L370,258 L350,252 L336,238 L330,218 L332,196 L340,172 L347,150Z',
+    'M440,58 L490,50 L545,48 L594,52 L634,62 L655,74 L650,90 L626,100 L590,106 L555,104 L518,98 L482,90 L456,82 L442,70Z',
+    'M436,122 L458,118 L476,122 L484,134 L480,148 L464,156 L446,154 L434,142 L430,130Z',
+    'M494,134 L524,130 L546,136 L555,150 L550,168 L538,180 L518,184 L500,180 L488,168 L484,152Z',
+    'M568,108 L602,102 L634,106 L650,118 L652,136 L638,148 L608,154 L578,148 L562,134 L560,118Z',
+    'M580,162 L606,156 L624,160 L628,176 L616,190 L598,196 L580,190 L570,178 L572,166Z',
+    'M592,275 L622,268 L646,274 L658,290 L652,310 L634,322 L610,324 L592,314 L582,298 L584,282Z',
+  ];
+
+  let html='<rect width="800" height="420" fill="#f1f5f9" rx="10"/>';
+  for(let i=1;i<=6;i++)html+=<line x1="0" y1="${i*60}" x2="800" y2="${i*60}" stroke="#e2e8f0" stroke-width="1"/>;
+  for(let i=1;i<=12;i++)html+=<line x1="${i*62}" y1="0" x2="${i*62}" y2="420" stroke="#e2e8f0" stroke-width="1"/>;
+  lands.forEach(d=>{html+=<path d="${d}" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1"/>});
+
+  COUNTRIES.forEach(c=>{
+    const col=LC[c.level];
+    const r=c.level==='high'?10:c.level==='med'?7:5;
+    html+=`
+      <g class="cpin" data-id="${c.id}" style="cursor:pointer">
+        <circle cx="${c.cx}" cy="${c.cy}" r="${r+5}" fill="${col}" opacity=".15">
+          <animate attributeName="r" values="${r+3};${r+8};${r+3}" dur="2.5s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values=".2;0;.2" dur="2.5s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="${c.cx}" cy="${c.cy}" r="${r}" fill="${col}" opacity=".4"/>
+        <circle cx="${c.cx}" cy="${c.cy}" r="${Math.round(r*.6)}" fill="${col}" opacity="1"/>
+      </g>`;
+  });
+  svg.innerHTML=html;
+
+  const tooltip=document.getElementById('map-tooltip');
+  svg.querySelectorAll('.cpin').forEach(el=>{
+    const cd=COUNTRIES.find(x=>x.id===el.dataset.id);
+    el.addEventListener('mouseenter',()=>{
+      const svgR=svg.getBoundingClientRect();
+      const contR=svg.closest('.map-container').getBoundingClientRect();
+      const scX=svgR.width/800,scY=svgR.height/420;
+      let tx=cd.cx*scX+(svgR.left-contR.left)+14;
+      let ty=cd.cy*scY+(svgR.top-contR.top)-8;
+      if(tx+250>contR.width)tx-=264;
+      if(ty+160>contR.height)ty-=170;
+      tooltip.style.cssText=left:${tx}px;top:${ty}px;;
+      tooltip.classList.add('show');
+      tooltip.innerHTML=`
+        <div class="tt-name">${cd.name} <span style="color:#90cdf4;font-size:.7rem;font-family:var(--font);font-weight:600">${cd.level==='high'?'Très fort':cd.level==='med'?'Fort':'Modéré'}</span></div>
+        <div class="tt-row"><span>Stablecoins</span><span class="tt-val">${cd.top}</span></div>
+        <div class="tt-row"><span>Volume</span><span class="tt-val">${cd.volume}</span></div>
+        <div style="font-size:.8rem;color:#cbd5e1;margin-top:.6rem;line-height:1.5;font-weight:400">${cd.usage}</div>`;
+    });
+    el.addEventListener('mouseleave',()=>{tooltip.classList.remove('show');});
+    el.addEventListener('click',()=>selectCountry(cd.id));
+  });
+
+  COUNTRIES.forEach(c=>{
+    const el=document.createElement('div');
+    el.className='cp-item';el.dataset.id=c.id;
+    el.innerHTML=`
+      <div class="cp-header">
+        <span class="cp-name">${c.name}</span>
+        <span class="cp-badge">${c.level==='high'?'TRÈS FORT':c.level==='med'?'FORT':'MODÉRÉ'}</span>
+      </div>
+      <div class="cp-desc">${c.top} · ${c.volume}</div>`;
+    el.addEventListener('click',()=>selectCountry(c.id));
+    panel.appendChild(el);
+  });
+}
+
+function selectCountry(id){
+  document.querySelectorAll('.cp-item').forEach(i=>i.classList.remove('selected'));
+  const el=document.querySelector(.cp-item[data-id="${id}"]);
+  if(el){el.classList.add('selected');el.scrollIntoView({behavior:'smooth',block:'nearest'})}
+}
+
+/* ════════════════════════
+   SCROLL / NAV
+════════════════════════ */
+window.addEventListener('scroll',()=>{
+  const b=document.getElementById('rpb');
+  const t=document.documentElement.scrollHeight-window.innerHeight;
+  b.style.transform=scaleX(${t>0?window.scrollY/t:0});
+});
+
 const rvObs=new IntersectionObserver(e=>{
   e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');rvObs.unobserve(x.target)}})
 },{threshold:.08});
 document.querySelectorAll('.rv').forEach(el=>rvObs.observe(el));
 
-// Barre de progression
-window.addEventListener('scroll',()=>{
-  const b=document.getElementById('rpb');
-  const t=document.documentElement.scrollHeight-window.innerHeight;
-  b.style.transform=`scaleX(${t>0?window.scrollY/t:0})`;
-});
+const secs=document.querySelectorAll('section[id]');
+const navAs=document.querySelectorAll('.nav-links a');
+const navObs=new IntersectionObserver(e=>{
+  e.forEach(x=>{
+    if(x.isIntersecting){
+      navAs.forEach(a=>a.classList.remove('active'));
+      const l=document.querySelector(.nav-links a[href="#${x.target.id}"]);
+      if(l)l.classList.add('active');
+    }
+  });
+},{threshold:.38});
+secs.forEach(s=>navObs.observe(s));
+
+/* ════════════════════════
+   INIT
+════════════════════════ */
+renderCoinList();
+buildMap();
+setTimeout(()=>selectCoin('usdt'),600);
 </script>
 </body>
 </html>
